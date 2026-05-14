@@ -2,8 +2,8 @@
 const CONFIG = {
   // ── 사이트 기본 정보 ──────────────────────────────────────────────────────
   blog: {
-    title: "아임웹 기술 블로그",
-    description: "아임웹 엔지니어들이 직접 쓰는 기술 이야기",
+    title: "아임웹 테크",
+    description: "아임웹 기술 조직의 이야기를 담습니다.",
     author: "Imweb Tech",
     language: "ko-KR",
     timezone: "Asia/Seoul",
@@ -47,9 +47,19 @@ const CONFIG = {
 
   // ── 외부 링크 / 푸터 ────────────────────────────────────────────────────
   social: {
-    github: "https://github.com/imweb-tech",
     homepage: "https://imweb.me",
     careers: "https://career.imweb.me",
+    contactEmail: "tech@imweb.me",
+  },
+
+  // ── 회사 정보 (푸터 노출) ───────────────────────────────────────────────
+  company: {
+    name: "(주)아임웹",
+    ceo: "이수모",
+    privacyOfficer: "김형섭",
+    businessNumber: "105-87-83592",
+    ecommerceNumber: "제 2023-서울강남-02377",
+    address: "서울 강남구 테헤란로 501 VPLEX",
   },
 
   // ── 메인 페이지 노출 옵션 ───────────────────────────────────────────────
