@@ -1,6 +1,7 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next"
 import { useMemo, useState } from "react"
 import Layout from "@/components/layout/Layout"
+import Banner from "@/components/home/Banner"
 import FeaturedPosts from "@/components/home/FeaturedPosts"
 import PostGrid from "@/components/home/PostGrid"
 import Sidebar from "@/components/home/Sidebar"
@@ -63,6 +64,7 @@ export default function HomePage({
   return (
     <Layout>
       <div className="container mx-auto pt-8 pb-24">
+        <Banner />
         <div
           className={
             hasSidebar
