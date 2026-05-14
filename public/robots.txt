@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://imweb-tech.github.io/imweb_techblog/sitemap.xml
