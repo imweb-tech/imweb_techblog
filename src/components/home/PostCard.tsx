@@ -19,9 +19,7 @@ export default function PostCard({
   return (
     <Link
       href={href}
-      className={`lift-card group block overflow-hidden rounded-card bg-white shadow-card hover:shadow-card-hover ${
-        isFeatured ? "h-full" : ""
-      }`}
+      className="lift-card group flex h-full flex-col overflow-hidden rounded-card bg-white shadow-card hover:shadow-card-hover"
     >
       {post.cover ? (
         <div
@@ -49,7 +47,7 @@ export default function PostCard({
         </div>
       )}
 
-      <div className={`flex flex-col ${isFeatured ? "p-7" : "p-5"}`}>
+      <div className={`flex flex-1 flex-col ${isFeatured ? "p-7" : "p-5"}`}>
         {post.category && (
           <div className="mb-2 text-xs font-semibold tracking-wider uppercase text-brand">
             {post.category}
@@ -72,7 +70,7 @@ export default function PostCard({
           </p>
         )}
 
-        <div className="mt-5 flex items-center justify-between text-xs text-ink-500">
+        <div className="mt-auto pt-5 flex items-center justify-between text-xs text-ink-500">
           <div className="flex items-center gap-2">
             {post.authors[0]?.avatar ? (
               // eslint-disable-next-line @next/next/no-img-element
