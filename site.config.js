@@ -42,7 +42,7 @@ const CONFIG = {
   nav: [
     { label: "글", href: "/" },
     { label: "채용", href: "https://career.imweb.me", external: true },
-    { label: "검색", href: "/search" },
+    { label: "개발자센터", href: "https://developers.imweb.me/", external: true },
   ],
 
   // ── 외부 링크 / 푸터 ────────────────────────────────────────────────────
