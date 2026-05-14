@@ -53,19 +53,16 @@ export default function HomePage({
   }, [posts, activeCategory, activeTag])
 
   const hasSidebar = categories.length > 0 || tags.length > 0
+  const isFiltered = Boolean(activeCategory || activeTag)
   const filterTitle = activeCategory
     ? activeCategory
     : activeTag
       ? `# ${activeTag}`
-      : "최신 글"
+      : "전체 글"
 
   return (
     <Layout>
-      {CONFIG.home.showFeatured && featured.length > 0 && !activeCategory && !activeTag && (
-        <FeaturedPosts posts={featured} />
-      )}
-
-      <div className="container mx-auto pb-24">
+      <div className="container mx-auto pt-8 pb-24">
         <div
           className={
             hasSidebar
@@ -85,6 +82,10 @@ export default function HomePage({
           )}
 
           <div className="min-w-0">
+            {CONFIG.home.showFeatured && featured.length > 0 && !isFiltered && (
+              <FeaturedPosts posts={featured} />
+            )}
+
             <PostGrid posts={filtered} title={filterTitle} />
 
             {posts.length === 0 && (
