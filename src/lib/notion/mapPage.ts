@@ -94,6 +94,9 @@ const pickThumbnail = (
   // file 속성 구조: [["filename.png", [["a", "https://..."]]]]
   const url = raw?.[0]?.[1]?.[0]?.[1]
   if (!url) return null
+  // 노션 신형 attachment 참조 (`attachment:<uuid>:<filename>`) 는 비공식
+  // API 로 실제 URL 을 풀어낼 수 없으므로 fallback 처리 (그라데이션 placeholder).
+  if (url.startsWith("attachment:")) return null
   return resolveImageUrl(url, block.id, recordMap)
 }
 
