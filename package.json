@@ -12,6 +12,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@giscus/react": "^3.1.0",
     "katex": "^0.16.11",
     "next": "14.2.5",
     "notion-client": "^7.10.0",

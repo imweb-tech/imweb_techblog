@@ -70,6 +70,25 @@ const CONFIG = {
     pageSize: 12,
   },
 
+  // ── 댓글 (giscus) ───────────────────────────────────────────────────────
+  // 1) 레포 Settings → General → Features → Discussions 활성화
+  // 2) https://github.com/apps/giscus 설치 (해당 레포에 접근 권한 부여)
+  // 3) https://giscus.app 에서 설정 마법사로 repoId / categoryId 받기
+  // 4) 아래 값 채우고 enabled: true 로 변경
+  comments: {
+    giscus: {
+      enabled: false,
+      repo: "imweb-tech/imweb_techblog",
+      repoId: "",
+      category: "General",
+      categoryId: "",
+      mapping: "pathname", // 페이지 경로를 discussion 과 매핑
+      lang: "ko",
+      reactionsEnabled: "1",
+      inputPosition: "bottom",
+    },
+  },
+
   // ── 플러그인 ─────────────────────────────────────────────────────────────
   plugins: {
     googleAnalytics: {

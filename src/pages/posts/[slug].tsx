@@ -5,6 +5,8 @@ import type { ExtendedRecordMap } from "notion-types"
 import Layout from "@/components/layout/Layout"
 import PostHeader from "@/components/post/PostHeader"
 import PostContent from "@/components/post/PostContent"
+import PostActions from "@/components/post/PostActions"
+import Comments from "@/components/post/Comments"
 import { getPostBySlug } from "@/lib/notion/getPostBySlug"
 import { getPosts } from "@/lib/notion/getPosts"
 import type { TPost } from "@/types"
@@ -49,6 +51,8 @@ export default function PostPage({
       </Head>
       <PostHeader post={post} />
       <PostContent recordMap={recordMap} />
+      <PostActions post={post} />
+      <Comments />
 
       <div className="container mx-auto max-w-prose pb-24 text-sm">
         <Link
