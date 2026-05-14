@@ -38,10 +38,11 @@ const CONFIG = {
   },
 
   // ── 네비게이션 ───────────────────────────────────────────────────────────
+  // external: true 면 새 탭으로 엽니다(외부 URL).
   nav: [
     { label: "글", href: "/" },
-    { label: "태그", href: "/tags" },
-    { label: "소개", href: "/about" },
+    { label: "채용", href: "https://career.imweb.me", external: true },
+    { label: "검색", href: "/search" },
   ],
 
   // ── 외부 링크 / 푸터 ────────────────────────────────────────────────────
@@ -53,9 +54,9 @@ const CONFIG = {
 
   // ── 메인 페이지 노출 옵션 ───────────────────────────────────────────────
   home: {
-    showHero: true,
+    showHero: false,
     showFeatured: true,
-    featuredCount: 3,
+    featuredCount: 2,
     pageSize: 12,
   },
 

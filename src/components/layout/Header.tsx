@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { useState, useEffect } from "react"
+import { withBasePath } from "@/lib/utils/withBasePath"
 
 const CONFIG = require("../../../site.config")
 
@@ -24,32 +25,42 @@ export default function Header() {
     >
       <div className="container mx-auto flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold">
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand text-white text-sm">
-            i
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={withBasePath("/symbol.webp")}
+            alt={CONFIG.blog.title}
+            className="h-7 w-auto"
+          />
           <span className="text-[1.05rem] tracking-tight">
             {CONFIG.blog.title}
           </span>
         </Link>
 
         <nav className="flex items-center gap-1 sm:gap-3">
-          {CONFIG.nav.map((item: { label: string; href: string }) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-lg px-3 py-2 text-sm font-medium text-ink-700 hover:text-ink-900 hover:bg-surface transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
-          <a
-            href={CONFIG.social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex rounded-lg px-3 py-2 text-sm font-medium text-ink-700 hover:text-ink-900 hover:bg-surface transition-colors"
-          >
-            GitHub
-          </a>
+          {CONFIG.nav.map(
+            (item: { label: string; href: string; external?: boolean }) => {
+              const className =
+                "rounded-lg px-3 py-2 text-sm font-medium text-ink-700 hover:text-ink-900 hover:bg-surface transition-colors"
+              if (item.external) {
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={className}
+                  >
+                    {item.label}
+                  </a>
+                )
+              }
+              return (
+                <Link key={item.href} href={item.href} className={className}>
+                  {item.label}
+                </Link>
+              )
+            }
+          )}
         </nav>
       </div>
     </header>

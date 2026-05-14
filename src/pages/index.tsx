@@ -1,7 +1,6 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next"
 import { useMemo, useState } from "react"
 import Layout from "@/components/layout/Layout"
-import Hero from "@/components/home/Hero"
 import FeaturedPosts from "@/components/home/FeaturedPosts"
 import PostGrid from "@/components/home/PostGrid"
 import Sidebar from "@/components/home/Sidebar"
@@ -62,8 +61,6 @@ export default function HomePage({
 
   return (
     <Layout>
-      <Hero postCount={posts.length} />
-
       {CONFIG.home.showFeatured && featured.length > 0 && !activeCategory && !activeTag && (
         <FeaturedPosts posts={featured} />
       )}
