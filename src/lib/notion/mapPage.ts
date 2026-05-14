@@ -137,8 +137,9 @@ const pickAuthors = (
     .map((uid: string) => {
       const u = unwrap(recordMap.notion_user?.[uid])
       if (!u) return null
-      const name =
-        [u.name, u.given_name, u.family_name].filter(Boolean)[0] ?? "Imweb"
+      // 노션 표시 규칙에 따라 name 우선, 없으면 한국식(성+이름) 으로 조합.
+      const fullName = `${u.family_name ?? ""}${u.given_name ?? ""}`.trim()
+      const name = u.name || fullName || "Imweb"
       return { name, avatar: u.profile_photo ?? undefined } as TAuthor
     })
     .filter(Boolean) as TAuthor[]

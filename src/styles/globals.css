@@ -243,3 +243,9 @@ a {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* ── react-notion-x: 상세 페이지에서 노션 DB row 의 속성 테이블 숨김 ───── */
+/* 이 정보는 우리 자체 PostHeader 가 이미 보여주므로 중복 노출을 피합니다. */
+.notion-collection-page-properties {
+  display: none !important;
+}
