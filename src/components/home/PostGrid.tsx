@@ -14,7 +14,7 @@ export default function PostGrid({
   posts: TPost[]
   title?: string
 }) {
-  const [viewMode, setViewMode] = useState<ViewMode>("grid")
+  const [viewMode, setViewMode] = useState<ViewMode>("list")
 
   if (!posts.length) {
     return (
