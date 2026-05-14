@@ -3,7 +3,12 @@ import Link from "next/link"
 import Layout from "@/components/layout/Layout"
 import { getPosts, getTags } from "@/lib/notion/getPosts"
 
-export const getStaticProps: GetStaticProps = async () => {
+type Props = {
+  tags: Awaited<ReturnType<typeof getTags>>
+  total: number
+}
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
   const [posts, tags] = await Promise.all([getPosts(), getTags()])
   return { props: { tags, total: posts.length } }
 }
