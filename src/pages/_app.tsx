@@ -16,9 +16,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content={CONFIG.brand.primary} />
         <title>{CONFIG.blog.title}</title>
         <meta name="description" content={CONFIG.blog.description} />
-        <link rel="icon" type="image/svg+xml" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/favicon.svg`} />
-        <link rel="icon" type="image/x-icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/favicon.ico`} />
-        <link rel="apple-touch-icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/apple-touch-icon.png`} />
+        <link rel="icon" type="image/webp" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/symbol.webp`} />
+        <link rel="apple-touch-icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/symbol.webp`} />
         <meta property="og:title" content={CONFIG.blog.title} />
         <meta property="og:description" content={CONFIG.blog.description} />
         <meta property="og:type" content="website" />
