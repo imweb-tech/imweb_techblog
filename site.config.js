@@ -77,11 +77,11 @@ const CONFIG = {
   // 4) 아래 값 채우고 enabled: true 로 변경
   comments: {
     giscus: {
-      enabled: false,
+      enabled: true,
       repo: "imweb-tech/imweb_techblog",
-      repoId: "",
+      repoId: "R_kgDOScKclg",
       category: "General",
-      categoryId: "",
+      categoryId: "DIC_kwDOScKcls4C9BhC",
       mapping: "pathname", // 페이지 경로를 discussion 과 매핑
       lang: "ko",
       reactionsEnabled: "1",
