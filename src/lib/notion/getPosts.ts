@@ -113,17 +113,6 @@ export async function getPostSlugs(): Promise<string[]> {
   return posts.map((p) => p.slug)
 }
 
-export async function getFeaturedPosts(limit = 3): Promise<TPost[]> {
-  const posts = await getPosts()
-  const featured = posts.filter((p) => p.featured)
-  if (featured.length >= limit) return featured.slice(0, limit)
-  // featured 가 부족하면 최신글로 채워줍니다.
-  const fill = posts
-    .filter((p) => !p.featured)
-    .slice(0, limit - featured.length)
-  return [...featured, ...fill]
-}
-
 export async function getCategories(): Promise<
   { name: string; count: number }[]
 > {

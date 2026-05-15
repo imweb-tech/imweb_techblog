@@ -2,21 +2,16 @@ import type { GetStaticProps, InferGetStaticPropsType } from "next"
 import { useMemo, useState } from "react"
 import Layout from "@/components/layout/Layout"
 import Banner from "@/components/home/Banner"
-import FeaturedPosts from "@/components/home/FeaturedPosts"
 import PostGrid from "@/components/home/PostGrid"
 import Sidebar from "@/components/home/Sidebar"
 import {
   getPosts,
-  getFeaturedPosts,
   getCategories,
   getTags,
 } from "@/lib/notion/getPosts"
 
-const CONFIG = require("../../site.config")
-
 type Props = {
   posts: Awaited<ReturnType<typeof getPosts>>
-  featured: Awaited<ReturnType<typeof getFeaturedPosts>>
   categories: Awaited<ReturnType<typeof getCategories>>
   tags: Awaited<ReturnType<typeof getTags>>
 }
@@ -25,22 +20,20 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   // 노션 API 가 일시적으로 실패해도 사이트 자체는 살아있도록 (빈 상태 UI) graceful fallback.
   // 영구 실패는 Actions 로그에서 console.error 로 추적 가능.
   try {
-    const [posts, featured, categories, tags] = await Promise.all([
+    const [posts, categories, tags] = await Promise.all([
       getPosts(),
-      getFeaturedPosts(CONFIG.home.featuredCount),
       getCategories(),
       getTags(),
     ])
-    return { props: { posts, featured, categories, tags } }
+    return { props: { posts, categories, tags } }
   } catch (err) {
     console.error("[home] getStaticProps 실패 — 빈 상태로 fallback:", err)
-    return { props: { posts: [], featured: [], categories: [], tags: [] } }
+    return { props: { posts: [], categories: [], tags: [] } }
   }
 }
 
 export default function HomePage({
   posts,
-  featured,
   categories,
   tags,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -56,7 +49,6 @@ export default function HomePage({
   }, [posts, activeCategory, activeTag])
 
   const hasSidebar = categories.length > 0 || tags.length > 0
-  const isFiltered = Boolean(activeCategory || activeTag)
   const filterTitle = activeCategory
     ? activeCategory
     : activeTag
@@ -91,12 +83,7 @@ export default function HomePage({
                 <div className="text-2xl font-bold tracking-tight">잠시만 기다려주세요.</div>
               </div>
             ) : (
-              <>
-                {CONFIG.home.showFeatured && featured.length > 0 && !isFiltered && (
-                  <FeaturedPosts posts={featured} />
-                )}
-                <PostGrid posts={filtered} title={filterTitle} />
-              </>
+              <PostGrid posts={filtered} title={filterTitle} />
             )}
           </div>
         </div>

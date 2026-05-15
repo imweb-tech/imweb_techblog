@@ -65,8 +65,6 @@ const CONFIG = {
   // ── 메인 페이지 노출 옵션 ───────────────────────────────────────────────
   home: {
     showHero: false,
-    showFeatured: true,
-    featuredCount: 2,
     pageSize: 12,
   },
 
