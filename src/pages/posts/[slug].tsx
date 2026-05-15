@@ -19,10 +19,15 @@ type Props = {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getPosts()
-  return {
-    paths: posts.map((p) => ({ params: { slug: p.slug } })),
-    fallback: false,
+  try {
+    const posts = await getPosts()
+    return {
+      paths: posts.map((p) => ({ params: { slug: p.slug } })),
+      fallback: false,
+    }
+  } catch (err) {
+    console.error("[posts/[slug]] getStaticPaths 실패 — 빈 paths 로 fallback:", err)
+    return { paths: [], fallback: false }
   }
 }
 

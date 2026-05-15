@@ -10,8 +10,13 @@ type Props = {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const posts = await getPosts()
-  return { props: { posts } }
+  try {
+    const posts = await getPosts()
+    return { props: { posts } }
+  } catch (err) {
+    console.error("[search] getStaticProps 실패 — 빈 상태로 fallback:", err)
+    return { props: { posts: [] } }
+  }
 }
 
 export default function SearchPage({

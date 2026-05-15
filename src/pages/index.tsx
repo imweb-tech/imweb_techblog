@@ -22,17 +22,19 @@ type Props = {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  // 빌드 타임에 Notion 에서 모든 글을 가져와 정적 생성.
-  // NOTION_TOKEN 이 없으면 getPosts() 내부에서 fixture 데이터로 대체됩니다.
-  const [posts, featured, categories, tags] = await Promise.all([
-    getPosts(),
-    getFeaturedPosts(CONFIG.home.featuredCount),
-    getCategories(),
-    getTags(),
-  ])
-
-  return {
-    props: { posts, featured, categories, tags },
+  // 노션 API 가 일시적으로 실패해도 사이트 자체는 살아있도록 (빈 상태 UI) graceful fallback.
+  // 영구 실패는 Actions 로그에서 console.error 로 추적 가능.
+  try {
+    const [posts, featured, categories, tags] = await Promise.all([
+      getPosts(),
+      getFeaturedPosts(CONFIG.home.featuredCount),
+      getCategories(),
+      getTags(),
+    ])
+    return { props: { posts, featured, categories, tags } }
+  } catch (err) {
+    console.error("[home] getStaticProps 실패 — 빈 상태로 fallback:", err)
+    return { props: { posts: [], featured: [], categories: [], tags: [] } }
   }
 }
 
@@ -84,19 +86,17 @@ export default function HomePage({
           )}
 
           <div className="min-w-0">
-            {CONFIG.home.showFeatured && featured.length > 0 && !isFiltered && (
-              <FeaturedPosts posts={featured} />
-            )}
-
-            <PostGrid posts={filtered} title={filterTitle} />
-
-            {posts.length === 0 && (
+            {posts.length === 0 ? (
               <div className="py-24 text-center">
-                <div className="mb-3 text-2xl font-bold tracking-tight">아직 글이 없어요</div>
-                <div className="text-ink-500">
-                  Notion 데이터베이스 연동을 마치면 이 자리에 글이 나타납니다.
-                </div>
+                <div className="text-2xl font-bold tracking-tight">잠시만 기다려주세요.</div>
               </div>
+            ) : (
+              <>
+                {CONFIG.home.showFeatured && featured.length > 0 && !isFiltered && (
+                  <FeaturedPosts posts={featured} />
+                )}
+                <PostGrid posts={filtered} title={filterTitle} />
+              </>
             )}
           </div>
         </div>

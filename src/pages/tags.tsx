@@ -9,8 +9,13 @@ type Props = {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const [posts, tags] = await Promise.all([getPosts(), getTags()])
-  return { props: { tags, total: posts.length } }
+  try {
+    const [posts, tags] = await Promise.all([getPosts(), getTags()])
+    return { props: { tags, total: posts.length } }
+  } catch (err) {
+    console.error("[tags] getStaticProps 실패 — 빈 상태로 fallback:", err)
+    return { props: { tags: [], total: 0 } }
+  }
 }
 
 export default function TagsPage({
