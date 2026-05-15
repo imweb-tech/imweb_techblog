@@ -1,5 +1,5 @@
 import type { ExtendedRecordMap } from "notion-types"
-import { notion } from "./client"
+import { notion, fetchPage } from "./client"
 import { mapBlockToPost, unwrap } from "./mapPage"
 import type { TPost } from "@/types"
 
@@ -21,7 +21,7 @@ const extractBlockIds = (query: CollectionQueryResult | undefined): string[] => 
 }
 
 const fetchDatabaseRecordMap = async (): Promise<ExtendedRecordMap> => {
-  return notion.getPage(CONFIG.notion.databaseId)
+  return fetchPage(CONFIG.notion.databaseId)
 }
 
 // 공개 게시된 페이지의 recordMap 에는 작성자(notion_user) 정보가 비어있어

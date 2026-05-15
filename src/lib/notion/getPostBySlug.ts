@@ -1,5 +1,5 @@
 import type { ExtendedRecordMap } from "notion-types"
-import { notion } from "./client"
+import { notion, fetchPage } from "./client"
 import { getPosts } from "./getPosts"
 import { unwrap } from "./mapPage"
 import type { TPost } from "@/types"
@@ -13,7 +13,7 @@ export async function getPostBySlug(
   const post = posts.find((p) => p.slug === slug)
   if (!post) return null
 
-  const recordMap = await notion.getPage(post.id)
+  const recordMap = await fetchPage(post.id)
   await enrichPageUsers(recordMap)
   return { ...post, recordMap }
 }
