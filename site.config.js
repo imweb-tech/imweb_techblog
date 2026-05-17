@@ -8,8 +8,6 @@ const CONFIG = {
     language: "ko-KR",
     timezone: "Asia/Seoul",
     siteUrl: "https://imweb-tech.github.io/imweb_techblog",
-    ogImage: "/og-default.png",
-    favicon: "/favicon.ico",
   },
 
   // ── 브랜드 컬러 ─────────────────────────────────────────────────────────
@@ -27,14 +25,11 @@ const CONFIG = {
   },
 
   // ── Notion 연동 ──────────────────────────────────────────────────────────
-  // 공식 Notion API 사용. .env.local 에 NOTION_TOKEN, NOTION_DATABASE_ID 를 설정하세요.
+  // notion-client (비공식 API). 토큰 불필요. DB 가 "Publish to web" 되어 있어야 함.
   notion: {
     // URL 의 `09870e1112ce83098f628118b6ba9bb3` 부분이 데이터베이스 ID 입니다.
-    // 환경 변수로 덮어쓸 수 있도록 process.env 우선.
     databaseId:
       process.env.NOTION_DATABASE_ID || "09870e1112ce83098f628118b6ba9bb3",
-    // posts 가 변경된 후 재빌드 주기(초). 정적 빌드에서는 ISR 이 동작하지 않으므로 참고용.
-    revalidateTime: 60 * 60,
   },
 
   // ── 네비게이션 ───────────────────────────────────────────────────────────
@@ -62,12 +57,6 @@ const CONFIG = {
     address: "서울 강남구 테헤란로 501 VPLEX",
   },
 
-  // ── 메인 페이지 노출 옵션 ───────────────────────────────────────────────
-  home: {
-    showHero: false,
-    pageSize: 12,
-  },
-
   // ── 댓글 (giscus) ───────────────────────────────────────────────────────
   // 1) 레포 Settings → General → Features → Discussions 활성화
   // 2) https://github.com/apps/giscus 설치 (해당 레포에 접근 권한 부여)
@@ -84,14 +73,6 @@ const CONFIG = {
       lang: "ko",
       reactionsEnabled: "1",
       inputPosition: "bottom",
-    },
-  },
-
-  // ── 플러그인 ─────────────────────────────────────────────────────────────
-  plugins: {
-    googleAnalytics: {
-      enable: false,
-      measurementId: "",
     },
   },
 }
